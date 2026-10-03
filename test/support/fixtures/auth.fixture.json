@@ -1,0 +1,46 @@
+{
+    "adminSucesso": [
+        {
+            "testTitle": "deve retornar 200 quando informar e-mail e senha válidos",
+            "expectedStatusCode": 200
+        },
+        {
+            "testTitle": "deve retornar um token quando informar e-mail e senha válidos",
+            "expectedStatusCode": 200
+        }
+    ],
+    "userSucesso": [
+        {
+            "testTitle": "deve retornar um token quando informar e-mail e senha válidos",
+            "expectedStatusCode": 200
+        },
+        {
+            "testTitle": "deve retornar um token quando informar e-mail e senha válidos",
+            "expectedStatusCode": 200
+        }
+    ],
+    "adminFalha": [
+        {
+            "testTitle": "deve retornar 401 quando a senha informada for inválida",
+            "expectedStatusCode": 401,
+            "mensagemErro": "E-mail ou senha inválidos."
+        },
+        {
+            "testTitle": "deve retornar a mensagem 'E-mail ou senha inválidos.' quando a senha informada for inválida",
+            "expectedStatusCode": 401,
+            "mensagemErro": "E-mail ou senha inválidos."
+        }        
+    ],
+    "userFalha": [
+        {
+            "testTitle": "deve retornar a mensagem 'E-mail ou senha inválidos.' quando a senha informada for inválida",            
+            "expectedStatusCode": 401,
+            "mensagemErro": "E-mail ou senha inválidos."
+        },
+        {
+            "testTitle": "deve retornar a mensagem 'E-mail ou senha inválidos.' quando a senha informada for inválida",
+            "expectedStatusCode": 401,
+            "mensagemErro": "E-mail ou senha inválidos."
+        }
+    ]
+}

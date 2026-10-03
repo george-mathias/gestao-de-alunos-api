@@ -1,0 +1,49 @@
+name: Testes de API
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar testes
+        run: npm test
+        env:
+          MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
+          VALID_ADMIN_EMAIL: ${{ secrets.VALID_ADMIN_EMAIL }}
+          VALID_ADMIN_SENHA: ${{ secrets.VALID_ADMIN_SENHA }}
+          VALID_USER_EMAIL: ${{ secrets.VALID_USER_EMAIL }}
+          VALID_USER_SENHA: ${{ secrets.VALID_USER_SENHA }}
+          INVALID_ADMIN_EMAIL: ${{ secrets.INVALID_ADMIN_EMAIL }}
+          INVALID_ADMIN_SENHA: ${{ secrets.INVALID_ADMIN_SENHA }}
+          INVALID_USER_EMAIL: ${{ secrets.INVALID_USER_EMAIL }}
+          INVALID_USER_SENHA: ${{ secrets.INVALID_USER_SENHA }}
